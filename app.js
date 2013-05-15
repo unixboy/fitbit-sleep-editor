@@ -1,11 +1,11 @@
 // Configure me
 FITBIT_CONSUMER_KEY = '4b5850cfd39e46c1afb0ffb082b2cb45';
 FITBIT_CONSUMER_SECRET = 'dca8dbfc141748d8822d07d6163f693b';
-HOST = 'http://fitbit-sleep-editor.hp.af.cm'; // http://local.jeremiahlee.com:3000';
+// HOST = 'http://fitbit-sleep-editor.hp.af.cm'; 
+HOST = 'http://local.jeremiahlee.com:3000';
 
 var express = require('express'),
 	routes = require('./routes'),
-	sleep = require('./routes/sleep'),
 	http = require('http'),
 	path = require('path'),
 	passport = require('passport'),
@@ -60,7 +60,6 @@ passport.use(
 ));
 
 app.get('/', routes.index);
-app.get('/sleep', sleep.index);
 app.get(/^\/proxy\//, routes.proxy);
 
 // Redirect the user to FitBit for authentication.
@@ -72,7 +71,7 @@ app.get('/auth/fitbit', passport.authenticate('fitbit'));
 app.get('/auth/fitbit/callback', 
 	passport.authenticate('fitbit', 
 		{
-			successRedirect: '/sleep',
+			successRedirect: '/edit.html',
 			failureRedirect: '/'
 		}
 	)

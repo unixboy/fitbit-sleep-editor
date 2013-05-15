@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8" />
+<title>Fitbit Sleep Editor</title>
+<link rel="stylesheet" href="css/foundation.css" />
+<link rel="stylesheet" href="css/fitbit-sleep-editor.css" />
+<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/backbone.js"></script>
+<script src="js/sleep-editor.js"></script>
+<script type="text/template" id="day-template">
+				<th scole="row" class="right"><strong><%= dayName %></strong>, <%= date %></th>
+				<td><%= awoke %></td>
+				<td><%= duration %></td>
+</script>
+</head>
+<body>
+
+<div class="container">
+	<h1>Fitbit Sleep Editor</h1>
+
+	<p>Fitbit can analyze your sleep quality. <a href="https://help.fitbit.com/customer/portal/articles/176101-how-do-i-track-my-sleep-" title="Fitbit Help: How do I track my sleep?">Wear your Fitbit at night</a>, then specify when you went to bed and when you awoke.</p>
+
+	<table>
+		<thead>
+			<tr>
+				<td id="week" colspan="3" class="fse-calendar text-center text-middle">
+					<button id="fse-calendar-prev" class="icon-chevron-left left"></button>
+					<button id="fse-calendar-next" class="icon-chevron-right right"></button>
+					Week of<br /><span id="week-start-date">April 28, 2013</span>
+				</td>
+			</tr>
+			<tr>
+				<th scope="col">Day</th>
+				<th scope="col">Awoke</th>
+				<th scope="col">Duration</th>
+			</tr>
+		</thead>
+		<tbody id="days">
+		</tbody>
+	</table>
+</div>
+
+</body>
+</html>

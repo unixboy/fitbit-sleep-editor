@@ -1,0 +1,11 @@
+/* humanstxt.org */
+
+/* TEAM */
+	Jeremiah Lee — @JeremiahLee
+
+/* SITE */
+	Standards: HTML5, CSS3
+	APIs: Fitbit
+	Components: Backbone.js, jQuery, Moment.js, Node.js, Underscore.js, ZURB Foundation 
+	Software: Sublime Text 2, Git, GitHub
+	Source: https://github.com/jeremiahlee/fitbit-sleep-editor

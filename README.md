@@ -7,3 +7,6 @@ First time:
 
 Updating:
 > af update fitbit-sleep-editor
+
+
+Try it: http://fitbit-sleep-editor.hp.af.cm/

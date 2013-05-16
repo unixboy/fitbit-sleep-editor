@@ -21,7 +21,9 @@
 
 	// Model for Day
 	window.Day = Backbone.Model.extend({
-		urlRoot: "/proxy/1/user/-/sleep/date/",
+		url: function() {
+			return "/proxy/1/user/-/sleep/date/" + this.id + ".json";
+		},
 
 		initialize: function() {
 			console.log("New Day initialized: ", this.id);
@@ -61,6 +63,21 @@
 			this.set(newDaySet);
 		}
 	});
+
+	// Model for editor
+	window.Night = Backbone.Model.extend({
+		url: function() {
+			return "/proxy/1/user/-/activities/calories/date/" + this.id + "/"
+			+ moment(this.id, "YYYY-MM-DD").add("days", 1).format("YYYY-MM-DD")
+			+ "/1min.json";
+		},
+
+		initialize: function() {
+			console.log("New Night initialized: ", this.id);
+			this.fetch();
+		}
+	});
+
 
 	$(document).ready(function() {
 		// Views go here, as they reference templates in DOM
@@ -117,9 +134,18 @@
 			template: _.template($("#day-template").html()),
 			
 			initialize: function(options) {
+				_.bindAll(this, "render", "showHideEditor");
+
 				this.model = this.options.model;
 
 				this.model.on("change", this.render, this);
+
+				this.nightView = null;
+				this.nightModel = null;
+			},
+
+			events: {
+				"click": "showHideEditor"
 			},
 
 			render: function() {
@@ -149,6 +175,42 @@
 					duration: duration
 				}));
 
+				return this;
+			},
+
+			showHideEditor: function() {
+				console.log('show hide editor');
+				
+				if (!this.nightView) {
+					console.log('create nightView and nightModel');
+
+					// Create a new Night model and view
+					this.nightModel = new Night({id: this.model.id});
+					this.nightView = new NightRowView({model: this.nightModel});
+
+					// Insert night data row after this sleep data row
+				 	this.$el.after(this.nightView.render().el);
+
+				} else {
+					// View exists, so toggle display of the night view
+					this.nightView.$el.toggleClass("hide");
+				}
+			}
+		});
+
+		window.NightRowView = Backbone.View.extend({
+			tagName: "tr",
+			template: _.template($("#night-template").html()),
+			
+			initialize: function(options) {
+				_.bindAll(this, "render");
+			},
+
+			render: function() {
+				console.log('NightRowView.render');
+				$(this.el).html(this.template());
+
+				// NEXT: Create graph of calorie data
 				return this;
 			}
 		});

@@ -19,7 +19,7 @@ exports.proxy = function(req, res) {
 	);
 	
 	oAuth.get(
-		"https://api.fitbit.com" + req.url.substr('/proxy'.length) + ".json",
+		"https://api.fitbit.com" + req.url.substr('/proxy'.length),
 		req.session.passport.user.token, req.session.passport.user.tokenSecret,
 		function(error, data) {
 			if (error) {
